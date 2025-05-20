@@ -1,4 +1,5 @@
 import numpy as np
+from QueuesLinked import QueuesLinked
 
 class Graph:
     def __init__(self, vertices):
@@ -53,6 +54,44 @@ class Graph:
     def display_adjMat(self):
         print(self._adjMat)
 
+    def bfs(self, s):
+        i = s
+        q = QueuesLinked()
+        visited = [0] * self._vertices
+        print(i, end = ' ')
+        visited[i] = 1
+        q.enqueue(i)
+        while not q.isempty():
+            i = q.dequeue()
+            for j in range(self._vertices):
+                if self._adjMat[i][j] == 1 and visited[j] == 0:
+                    print(j, end = ' ')
+                    visited[j] = 1
+                    q.enqueue(j)
+
+
+
+# BFS
+G = Graph(7)
+G.insert_edge(0, 1)
+G.insert_edge(0, 5)
+G.insert_edge(0, 6)
+G.insert_edge(1, 0)
+G.insert_edge(1, 2)
+G.insert_edge(1, 5)
+G.insert_edge(1, 6)
+G.insert_edge(2, 3)
+G.insert_edge(2, 4)
+G.insert_edge(2, 6)
+G.insert_edge(3, 4)
+G.insert_edge(4, 2)
+G.insert_edge(4, 5)
+G.insert_edge(5, 2)
+G.insert_edge(5, 3)
+G.insert_edge(6, 3)
+
+print('BFS')
+G.bfs(1)
 
 # undirected graph
 # G = Graph(4)
@@ -93,18 +132,18 @@ class Graph:
 # print('Edge 1-2: ', G.exist_edge(1, 2))
 
 # Directed Weighted Graph
-G = Graph(4)
-G.display_adjMat()
-print('Vertices: ' , G.vertex_count())
-G.insert_edge(0, 1, 26)
-G.insert_edge(0, 2, 16)
-G.insert_edge(1, 2, 12)
-G.insert_edge(2, 3, 8)
-G.display_adjMat()
-print('Edges: ', G.edge_count())
-G.edges()
-print('Edge exists: ' , G.exist_edge(1, 2))
-print('Indegree: ',G.indegree(2))
-print('Outdegree: ',G.outdegree(2))
-G.remove_edge(1, 2)
-print('Edge 1-2: ', G.exist_edge(1, 2))
+# G = Graph(4)
+# G.display_adjMat()
+# print('Vertices: ' , G.vertex_count())
+# G.insert_edge(0, 1, 26)
+# G.insert_edge(0, 2, 16)
+# G.insert_edge(1, 2, 12)
+# G.insert_edge(2, 3, 8)
+# G.display_adjMat()
+# print('Edges: ', G.edge_count())
+# G.edges()
+# print('Edge exists: ' , G.exist_edge(1, 2))
+# print('Indegree: ',G.indegree(2))
+# print('Outdegree: ',G.outdegree(2))
+# G.remove_edge(1, 2)
+# print('Edge 1-2: ', G.exist_edge(1, 2))
