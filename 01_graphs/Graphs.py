@@ -5,6 +5,7 @@ class Graph:
     def __init__(self, vertices):
         self._vertices = vertices
         self._adjMat = np.zeros((vertices, vertices))
+        self._visited = [0] * vertices
 
     def insert_edge(self, u,v, x = 1):
         self._adjMat[u][v] = x
@@ -69,6 +70,15 @@ class Graph:
                     visited[j] = 1
                     q.enqueue(j)
 
+    def dfs(self,s):
+        if self._visited[s] == 0:
+            print(s, end = ' ')
+            self._visited[s] = 1
+            for j in range(self._vertices):
+                if self._adjMat[j][s] == 1 and self._visited[j] == 0:
+                    self.dfs(j)
+
+
 
 
 # BFS
@@ -90,8 +100,11 @@ G.insert_edge(5, 2)
 G.insert_edge(5, 3)
 G.insert_edge(6, 3)
 
-print('BFS')
-G.bfs(1)
+# print('BFS')
+# G.bfs(1)
+
+print('DFS')
+G.dfs(1)
 
 # undirected graph
 # G = Graph(4)
